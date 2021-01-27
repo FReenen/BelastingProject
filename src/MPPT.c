@@ -4,6 +4,7 @@
 #include "debug.h"
 #include "global.h"
 #include "MPPT.h"
+#include "noodstop.h"
 #include "spi.h"
 
 #define PWM_MIN 0.001
@@ -30,11 +31,10 @@ void mppt_meetVermogen(){
   uint16_t curent = ADC_read(ADC_CH3);
   //TODO: add real formula for spanning and curent
   mppt_vermogen = (spanning * curent) / 100;
+  noodstop_vermogen(mppt_vermogen);
 }
 
 void mppt_init(){
-  PWM_init();
-
   PWM_Params params;
   PWM_Params_init(&params);
   params.dutyUnits = PWM_DUTY_FRACTION;

@@ -4,7 +4,7 @@
 
 | lable      | pin |
 |------------|----:|
-| start init | P05 |
+| start init |   ? |
 | start sys  | P03 |
 | noodstop   | P08 |
 
@@ -12,11 +12,11 @@
 
 | lable  | pin |
 |--------|----:|
-| CSK    | P45 |
-| MISO   | P06 |
+| CSK    | P05 |
+| MISO   | P53 |
 | MOSI   | P07 |
 | CS MSP | P18 |
-| CS ADC | P21 |
+| CS ADC | P62 |
 
 ## Other
 

@@ -38,7 +38,6 @@ GPIO2.$name            = "CONFIG_GPIO_INIT";
 GPIO2.pull             = "Pull Down";
 GPIO2.callbackFunction = "initISR";
 GPIO2.interruptTrigger = "Rising Edge";
-GPIO2.gpioPin.$assign  = "boosterpack.7";
 
 GPIO3.$name            = "CONFIG_GPIO_START";
 GPIO3.callbackFunction = "startSysISR";
@@ -52,6 +51,7 @@ GPIO4.initialOutputState = "High";
 GPIO5.$name              = "CONFIG_GPIO_CSADC";
 GPIO5.mode               = "Output";
 GPIO5.initialOutputState = "High";
+GPIO5.gpioPin.$assign    = "boosterpack.8";
 
 PWM1.$name     = "CONFIG_PWM_0";
 PWM1.$hardware = system.deviceData.board.components.LED_RED;
@@ -59,7 +59,11 @@ PWM1.$hardware = system.deviceData.board.components.LED_RED;
 Power.ioRetentionShutdown = ["GRP_1"];
 Power.parkPins.$name      = "ti_drivers_power_PowerCC32XXPins0";
 
-SPI1.$name = "CONFIG_SPI_MASTER";
+SPI1.$name               = "CONFIG_SPI_MASTER";
+SPI1.spi.$assign         = "SPI0";
+SPI1.spi.sclkPin.$assign = "boosterpack.7";
+SPI1.spi.misoPin.$assign = "boosterpack.28";
+SPI1.spi.mosiPin.$assign = "boosterpack.15";
 
 Watchdog1.$name            = "CONFIG_WATCHDOG_0";
 Watchdog1.watchdog.$assign = "WATCHDOG0";
@@ -69,14 +73,10 @@ Watchdog1.watchdog.$assign = "WATCHDOG0";
  * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
  * re-solve from scratch.
  */
-GPIO1.gpioPin.$suggestSolution         = "boosterpack.18";
+GPIO1.gpioPin.$suggestSolution         = "boosterpack.14";
+GPIO2.gpioPin.$suggestSolution         = "boosterpack.18";
 GPIO4.gpioPin.$suggestSolution         = "boosterpack.19";
-GPIO5.gpioPin.$suggestSolution         = "boosterpack.13";
 PWM1.timer.$suggestSolution            = "Timer2";
 PWM1.timer.pwmPin.$suggestSolution     = "boosterpack.29";
-SPI1.spi.$suggestSolution              = "SPI0";
-SPI1.spi.sclkPin.$suggestSolution      = "boosterpack.17";
-SPI1.spi.misoPin.$suggestSolution      = "boosterpack.14";
-SPI1.spi.mosiPin.$suggestSolution      = "boosterpack.15";
 SPI1.spi.dmaRxChannel.$suggestSolution = "UDMA_CH30";
 SPI1.spi.dmaTxChannel.$suggestSolution = "UDMA_CH31";

@@ -10,14 +10,16 @@
 
 - [x] ADC aanluiten
 
-- [ ] testcode voor mppt maken
-- [ ] testcode voor spi maken
+- [x] testcode voor mppt maken
+- [x] testcode voor spi maken
 - [ ] testcode voor i2c maken
 - [ ] uart deel maken
 
 ## maandag
 
-- [ ] mppt testen
+- [ ] mppt testen  
+een mosfet driver is in bestelling
+
 - [ ] adc testen
 
 - [ ] mppt updaten
@@ -25,8 +27,8 @@
 
 ## dinsdag
 
-- [ ] adc testen
-- [ ] spi testen
+- [x] adc testen
+- [x] spi testen
 
 ## woensdag
 

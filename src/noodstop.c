@@ -35,14 +35,25 @@ void noodstop_snelhied(uint16_t snelhied){
   // controleer snelheid
   if(snelhied > nood_maxwaardes.maxSnelheid){
     // PANIC!!
-    mppt_setSetpointOverride(nood_maxwaardes.maxVermogen);
-    
+    mppt_setSetpointOverride(nood_maxwaardes.maxVermogen); // zet vemogen max om de de snelheid te beperken
+    noodstop_activeerNoodstop(); // geef noodstop aan andere units
+    Status = OVERSPEED;
+
     // Wacht 0.5 seconde
     usleep(500E3);
 
-    // activeer noostop
-    Status = OVERSPEED;
-    noodstop_activeerNoodstop();
+    // zet het systeem uit
+    mppt_setSetpointOverride(0);
+  }
+}
+
+void noodstop_vermogen(uint8_t vermogen){
+  // controleer vermogen
+  if(snelhied > nood_maxwaardes.maxVermogen){
+    // PANIC!!
+    mppt_setSetpointOverride(0); // zet vemogen max om de de snelheid te beperken
+    noodstop_activeerNoodstop(); // geef noodstop aan andere units
+    Status = OVERLOAD;
   }
 }
 
@@ -101,14 +112,11 @@ void noodstop_init(){
   memset(&nood_maxwaardes, 0xff, sizeof(nood_maxwaardes)); // set all max value to invalid ones
 
   // controleer max waardes
-  while(1){
-    if(
-         nood_maxwaardes.maxSnelheid <= 60000
-      && nood_maxwaardes.maxTempratuur >= 60 && nood_maxwaardes.maxTempratuur <= 120
-      && nood_maxwaardes.maxVermogen <= 250
-    ){
-      break; // stop the loop, values are valid
-    }
+  while(
+        nood_maxwaardes.maxSnelheid > 60000
+    || nood_maxwaardes.maxTempratuur < 60 || nood_maxwaardes.maxTempratuur > 120
+    || nood_maxwaardes.maxVermogen > 250)
+  {
     usleep(100E3);
   }
 

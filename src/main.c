@@ -99,9 +99,9 @@ void * mainTask(void *arg){
         break;
       case OVERHEAD:
       case OVERLOAD:
-      case OVERSPEED:
       case EXT_NOODSTOP:
         stopSys();
+      case OVERSPEED: // don't stop on overload first wait for speed to go down
         return;
     }
     lastState = Status;
