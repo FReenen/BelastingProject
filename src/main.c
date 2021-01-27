@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include <pthread.h>
 #include <ti/drivers/GPIO.h>
+#include <ti/drivers/PWM.h>
 #include <ti/sysbios/BIOS.h>
 
 #include "debug.h"
@@ -40,7 +41,6 @@ pthread_t createSimplePTread(int prio, void * fn){
 }
 
 void startInit(){
-  SPI_Init();
   treads.comm = createSimplePTread(3, &comm_init);
   treads.noodstop = createSimplePTread(1, &noodstop_init);
   treads.mppt = createSimplePTread(1, &mppt_init);
@@ -113,7 +113,10 @@ void * mainTask(void *arg){
 int main(void){
   Status = SLEEP;
   Board_init(); // initialise board
-  treads.sysBeheer = createSimplePTread(1, mainTask);
+  GPIO_init();
+  SPI_Init();
+  PWM_init();
+  //TODO: initilize UART
   BIOS_start(); // start the BIOS
   while(1)
     sleep(10);
