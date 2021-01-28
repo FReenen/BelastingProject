@@ -27,10 +27,10 @@ uint8_t mppt_getVermogen(){
 }
 
 void mppt_meetVermogen(){
-  uint16_t spanning = ADC_read(ADC_CH2);
-  uint16_t curent = ADC_read(ADC_CH3);
-  //TODO: add real formula for spanning and curent
-  mppt_vermogen = (spanning * curent) / 100;
+  uint32_t spanning = ADC_read(ADC_CH2) * 1000 / 56; // milivolt
+  uint32_t curent = (ADC_read(ADC_CH3)-13) * 1000 / 173; // miliampere
+
+  mppt_vermogen = (spanning * curent) / 10000; // deciwatt
   noodstop_vermogen(mppt_vermogen);
 }
 
