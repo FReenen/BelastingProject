@@ -3,7 +3,7 @@
 #include "global.h"
 #include "debug.h"
 
-
+SPI_Handle *SPI_Handaler;
 SPI_Trans_t SPI_ADC;
 uint8_t ADC_TxBuf[4];
 uint8_t ADC_RxBuf[4];

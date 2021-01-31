@@ -8,5 +8,6 @@ void mppt_start();
 void mppt_deinit();
 void mppt_setSetpointOverride(uint8_t vermogen);
 void mppt_setSetpoint(uint8_t vermogen);
+uint8_t mppt_getVermogen();
 
 #endif
